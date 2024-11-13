@@ -1,0 +1,92 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+
+.nav-link:hover {
+  color: white !important;
+}
+
+.btn-outline-primary {
+  color: #fca139 !important;
+  border-color: #fca139 !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: #fca139 !important;
+  color: white !important;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 8px;
+  margin: 4px 0;
+  border-radius: 4px;
+}
+
+.message.user {
+  align-self: flex-end;
+}
+
+.message.system {
+  align-self: flex-start;
+}
+
+.chat-input {
+  resize: none;
+}
+
+.card-chatbox {
+  height: "100%";
+}
+
+/* Table design */
+
+.table {
+  font-size: 0.95rem;
+}
+
+.table th {
+  font-weight: bold;
+  color: #7d868f;
+}
+
+.table .text-decoration-none {
+  color: white;
+  font-weight: 500;
+}
+
+.table .text-decoration-none:hover {
+  color: #0071eb;
+  text-decoration: underline;
+}
+
+/* Root design */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  padding-bottom: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
