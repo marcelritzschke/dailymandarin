@@ -9,7 +9,7 @@ const openai = new OpenAI({apiKey: apiKey});
 export async function POST(request: Request) {
     const { msg }: { msg: Message[] } = await request.json();
 
-    var messages: ChatCompletionMessageParam[] = [];
+    const messages: ChatCompletionMessageParam[] = [];
     msg.forEach(el => {
         messages.push({role: el.sender, content: el.text});
     })
