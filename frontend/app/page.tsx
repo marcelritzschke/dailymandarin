@@ -2,7 +2,7 @@ import { LearningCard } from '@/types/types';
 import LearningCardsTable from './components/LearningCardsTable';
 
 async function fetchCards(): Promise<LearningCard[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/cards`);
+  const res = await fetch("/api/cards");
   return res.json();
 }
 

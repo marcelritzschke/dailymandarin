@@ -22,7 +22,7 @@ const ChatBoxComponent: React.FC = () => {
         setLoading(true);
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/chat`, {
+            const res = await fetch("/api/chat", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

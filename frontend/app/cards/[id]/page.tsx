@@ -3,7 +3,7 @@ import { LearningCard } from "@/types/types";
 
 
 async function fetchCard(id: string): Promise<LearningCard | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/cards/${id}`);
+  const res = await fetch(`/api/cards/${id}`);
   if (!res.ok) return null;
   return res.json();
 }
