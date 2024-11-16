@@ -1,10 +1,12 @@
 import ChatBoxComponent from "@/app/components/Chatbox";
+import { promises as fs } from 'fs'
 import { LearningCard } from "@/types/types";
-import cardsJson from '@/public/cards.json';
 
 
-function fetchCard(id: string): LearningCard | null {
-  const cards: LearningCard[] = cardsJson;
+async function fetchCard(id: string): Promise<LearningCard | null> {
+  const file = await fs.readFile(process.cwd() + '/public/cards.json', 'utf-8');
+  const cards: LearningCard[] = JSON.parse(file);
+
   const res: LearningCard | undefined = cards.find((card) => {
     return card.id.toString() === id;
   });
@@ -19,7 +21,7 @@ interface CardDetailProps {
 }
 
 export default async function CardDetailPage({ params }: CardDetailProps) {
-  const card = fetchCard(params.id);
+  const card = await fetchCard(params.id);
 
   if (!card) return (<p>Card not found</p>);
 
@@ -31,14 +33,14 @@ export default async function CardDetailPage({ params }: CardDetailProps) {
             <div className="card-header">Description</div>
             <div className="card-body">
               <h5 className="card-title">{card.word}</h5>
-              <p className="card-text">{card.description}</p>
+              <p className="card-text">{card.translation}</p>
             </div>
           </div>
           <div className="flex-grow-1"></div>
           <div className="card" style={{height: "49%"}}>
             <div className="card-header">Examples</div>
             <div className="card-body">
-              <p className="card-text">{card.example}</p>
+              <p className="card-text">{card.examples[0].original}</p>
             </div>
           </div>
         </div>

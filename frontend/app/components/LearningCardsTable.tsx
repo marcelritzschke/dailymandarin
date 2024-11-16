@@ -19,7 +19,7 @@ const LearningCardsTable: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
                   {card.word}
                 </Link>
               </td>
-              <td>{card.description}</td>
+              <td>{card.translation}</td>
               {/* <td>
                 <span className={`badge ${card.difficulty === 'Easy' ? 'bg-success' : card.difficulty === 'Medium' ? 'bg-warning' : 'bg-danger'}`}>
                   {card.difficulty}

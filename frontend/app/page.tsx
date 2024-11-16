@@ -1,14 +1,15 @@
 import { LearningCard } from '@/types/types';
+import { promises as fs } from 'fs'
 import LearningCardsTable from './components/LearningCardsTable';
-import cardsJson from '@/public/cards.json';
 
 
 export default async function HomePage() {
-  const cards: LearningCard[] = cardsJson;
+    const file = await fs.readFile(process.cwd() + '/public/cards.json', 'utf-8');
+    const cards: LearningCard[] = JSON.parse(file);
 
-  return (
-    <div className="container mt-4">
-      <LearningCardsTable cards={ cards }/>
-    </div>
-  );
+    return (
+        <div className="container mt-4">
+            <LearningCardsTable cards={cards} />
+        </div>
+    );
 }

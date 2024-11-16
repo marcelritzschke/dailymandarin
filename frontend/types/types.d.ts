@@ -1,8 +1,14 @@
+export interface Example {
+    original: string;
+    translation: string;
+}
+
 export interface LearningCard {
     id: number;
     word: string;
-    description: string;
-    example: string;
+    translation: string;
+    level: number;
+    examples: Example[];
 }
 
 export interface Message {
