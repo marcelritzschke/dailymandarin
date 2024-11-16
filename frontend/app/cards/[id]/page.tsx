@@ -1,24 +1,25 @@
 import ChatBoxComponent from "@/app/components/Chatbox";
 import { LearningCard } from "@/types/types";
+import cardsJson from '@/public/cards.json';
 
 
-// async function fetchCard(id: string): Promise<LearningCard | null> {
-//   const res = await fetch(`/api/cards/${id}`);
-//   if (!res.ok) return null;
-//   return res.json();
-// }
+function fetchCard(id: string): LearningCard | null {
+  const cards: LearningCard[] = cardsJson;
+  const res: LearningCard | undefined = cards.find((card) => {
+    return card.id.toString() === id;
+  });
+
+  if (res === undefined) return null;
+  
+  return res;
+}
 
 interface CardDetailProps {
     params: { id: string };
 }
 
 export default async function CardDetailPage({ params }: CardDetailProps) {
-  // const card = await fetchCard(params.id);
-  console.log(params.id);
-  const card: LearningCard = {id: 1,
-    word: "Test",
-    description: "desc",
-    example: "example"};
+  const card = fetchCard(params.id);
 
   if (!card) return (<p>Card not found</p>);
 

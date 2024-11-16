@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "word": "你好 (Nǐ hǎo)",
+        "description": "Hello in Chinese",
+        "example": "你好，我是小明。 (Hello, I am Xiaoming.)"
+    },
+    {
+        "id": 2,
+        "word": "谢谢 (Xièxiè)",
+        "description": "Thank you in Chinese",
+        "example": "谢谢你的帮助。 (Thank you for your help.)"
+    },
+    {
+        "id": 3,
+        "word": "再见 (Zàijiàn)",
+        "description": "Goodbye in Chinese",
+        "example": "再见！明天见。 (Goodbye! See you tomorrow.)"
+    }
+]

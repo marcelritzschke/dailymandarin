@@ -1,18 +1,10 @@
 import { LearningCard } from '@/types/types';
 import LearningCardsTable from './components/LearningCardsTable';
-
-// async function fetchCards(): Promise<LearningCard[]> {
-//   const res = await fetch("/api/cards");
-//   return res.json();
-// }
+import cardsJson from '@/public/cards.json';
 
 
 export default async function HomePage() {
-  // const cards = await fetchCards();
-  const cards: LearningCard[] = [{id: 1,
-      word: "Test",
-      description: "desc",
-      example: "example"}];
+  const cards: LearningCard[] = cardsJson;
 
   return (
     <div className="container mt-4">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image"
 
 export default function Navbar() {
     return (
@@ -6,7 +7,7 @@ export default function Navbar() {
         <div className="container-fluid">
           {/* Icon on the left */}
           <Link href="/" className="navbar-brand">
-            <img src="/madarin.png" alt="App Icon" width="30" height="30" className="d-inline-block align-top" />
+            <Image src="/madarin.png" alt="App Icon" width="30" height="30" className="d-inline-block align-top" />
           </Link>
   
           {/* Toggle button for mobile view */}
