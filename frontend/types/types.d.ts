@@ -1,14 +1,13 @@
-export interface Example {
+export interface BilingualText {
     original: string;
     translation: string;
 }
 
 export interface LearningCard {
-    id: number;
-    word: string;
-    translation: string;
+    id?: number;
+    word: BilingualText;
     level: number;
-    examples: Example[];
+    examples: BilingualText[];
 }
 
 export interface Message {

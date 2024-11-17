@@ -26,15 +26,20 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             {/* Navbar Links */}
             <ul className="navbar-nav me-auto">
-              <li className="nav-item">
-                <Link href="/" className="nav-link">
-                  Vocabulary List
-                </Link>
-              </li>
             </ul>
             {/* Sign in button */}
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
+                <Link href="/" className="nav-link">
+                  List Vocabulary
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/add-card/" className="nav-link">
+                  Add Vocabulary
+                </Link>
+              </li>
+              <li className="nav-item ms-3">
                 <button className="btn btn-outline-primary ms-2">Sign In</button>
               </li>
             </ul>

@@ -2,6 +2,22 @@
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
 
+.tone-first {
+  color: rgb(255, 82, 82) !important;
+}
+
+.tone-second {
+  color: rgb(92, 255, 87) !important;
+}
+
+.tone-third {
+  color: rgb(161, 47, 255) !important;
+}
+
+.tone-fourth {
+  color: rgb(255, 87, 205) !important;
+}
+
 .nav-link:hover {
   color: white !important;
 }
@@ -53,7 +69,7 @@
 
 .table th {
   font-weight: bold;
-  color: #7d868f;
+  color: #7d868f !important;
 }
 
 .table .text-decoration-none {
@@ -62,8 +78,12 @@
 }
 
 .table .text-decoration-none:hover {
-  color: #0071eb;
+  color: #0071eb !important;
   text-decoration: underline;
+}
+
+.trash-button:hover {
+  color: #a00e0e !important;
 }
 
 /* Root design */
