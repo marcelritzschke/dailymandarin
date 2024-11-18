@@ -1,8 +1,8 @@
 import { BilingualText } from "@/types/types";
 import { translateMandarinToPinyin, getTones } from "@/app/utils/translation"
-import { useState } from "react";
 
-const MandarinEnglishText: React.FC<{ text: BilingualText, focus: string }> = ({ text, focus }) => {
+
+const MandarinEnglishText: React.FC<{ key: number | undefined, text: BilingualText, focus: string }> = ({ key, text, focus }) => {
     const hanzi = text.original.split("");
     const tones = getTones(text.original).split(" ");
     const pinyin = translateMandarinToPinyin(text.original).split(" ");
@@ -18,7 +18,7 @@ const MandarinEnglishText: React.FC<{ text: BilingualText, focus: string }> = ({
         isToneColorized = true;
     }
     
-    console.log(tones, pinyin, hanzi);
+    // console.log(tones, pinyin, hanzi);
 
     const getTone = (tone: string, colorized: boolean) => {
         if (colorized) {
@@ -28,10 +28,10 @@ const MandarinEnglishText: React.FC<{ text: BilingualText, focus: string }> = ({
         }
     }
 
-    let focusPosStart = text.original.indexOf(focus);
-    let focusPosEnd = focusPosStart + focus.length - 1;
+    const focusPosStart = text.original.indexOf(focus);
+    const focusPosEnd = focusPosStart + focus.length - 1;
     const getFocus = (idx: number) => {
-        console.log(focusPosStart, focusPosEnd, idx);
+        // console.log(focusPosStart, focusPosEnd, idx);
         if (focusPosStart !== -1) {
             if (idx >= focusPosStart && idx <= focusPosEnd) {
                 return "fw-bold";
@@ -41,11 +41,11 @@ const MandarinEnglishText: React.FC<{ text: BilingualText, focus: string }> = ({
     }
 
     return (
-        <div className="card border-0">
+        <div className="card border-0" key={key}>
             <div className="card-body">
                 <h5 className="card-title">
                     {hanzi.map((c, idx) => (
-                        <span className={`font-monospace
+                        <span key={idx} className={`
                             ${getTone(tones[idx], isToneColorized)}
                             ${getFocus(idx)}
                         `}>{c}</span>

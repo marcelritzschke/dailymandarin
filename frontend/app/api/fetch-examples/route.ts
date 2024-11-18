@@ -9,8 +9,6 @@ const openai = new OpenAI({ apiKey: apiKey });
 export async function POST(request: Request) {
     const { count, msg }: { count: number, msg: BilingualText } = await request.json();
 
-    console.log(count, msg);
-
     const messages: ChatCompletionMessageParam[] = [
         { 
             role: "user",

@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.3",
+    "@prisma/client": "^5.22.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chinese-to-pinyin": "^1.3.1",
     "next": "14.2.15",
     "openai": "^4.71.1",
+    "prisma": "^5.22.0",
     "react": "^18",
     "react-bootstrap": "^2.10.5",
     "react-dom": "^18"

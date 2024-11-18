@@ -1,16 +1,22 @@
 import { NextResponse } from "next/server";
 import { LearningCard } from "@/types/types";
-import { promises as fs } from 'fs'
+import prisma from "@/prisma/client";
 
 
 export async function POST(request: Request) {
     const { card }: { card: LearningCard } = await request.json();
 
-    const file = await fs.readFile(process.cwd() + '/public/cards.json', 'utf-8');
-    const cards: LearningCard[] = JSON.parse(file);
-    cards.push(card);
-
-    fs.writeFile(process.cwd() + '/public/cards.json', JSON.stringify(cards));
+    await prisma.learningCard.create({
+        data: {
+          level: card.level,
+          word: {
+            create: card.word,
+          },
+          examples: {
+            create: card.examples,
+          },
+        },
+      });
 
     return NextResponse.json({status: 200});
 }

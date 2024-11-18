@@ -1,6 +1,6 @@
 "use client"
 import { BilingualText, LearningCard } from "@/types/types";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
 
 const AddCard: React.FC = () => {
@@ -35,15 +35,14 @@ const AddCard: React.FC = () => {
                 },
                 body: JSON.stringify({ count: count, msg: word }),
             });
-            
+
             if (!res.ok) {
                 throw new Error('Network response was not ok');
             }
-            
+
             const data = await res.json();
             const response: string = data.choices[0].message.content;
-            console.log(response)  
-            
+
             const examples: BilingualText[] = response
                 .trim()
                 .split("\n")
@@ -75,13 +74,14 @@ const AddCard: React.FC = () => {
                 setIsAlertExamples(false);
                 setExamples([...examples]);
             }
-            
+
         } catch (error) {
             console.error('Error sending message:', error);
         }
     }
-    
-    const submitToDict = async (e: FormEvent) => {      
+
+    // const submitToDict = async (e: FormEvent) => {
+    const submitToDict = async () => {
         const newCard: LearningCard = {level: 1, word: {original: wordInput, translation: translationInput}, examples: examples};
         try {
             const res = await fetch("/api/add-card", {
@@ -91,23 +91,23 @@ const AddCard: React.FC = () => {
                 },
                 body: JSON.stringify({ card: newCard }),
             });
-            
+
             if (!res.ok) {
                 throw new Error('Network response was not ok');
-            }            
+            }
         } catch (error) {
             console.error('Error sending message:', error);
         }
 
         // window.location.href = '/';
     }
-    
+
     return (
         <form onSubmit={submitToDict}>
             <div className="row mb-3">
                 <div className="col">
                     <label htmlFor="wordInput" className="form-label">Word</label>
-                    <input 
+                    <input
                         type="text"
                         className="form-control"
                         id="wordInput"
@@ -135,7 +135,7 @@ const AddCard: React.FC = () => {
                 Examples
             </div>
             {examples.map((example, idx) => (
-                <div className="row mb-3" key={idx}>                    
+                <div className="row mb-3" key={idx}>
                     <div className="col">
                         <input type="text" className="form-control" value={example.original} placeholder="Sentence" readOnly />
                     </div>

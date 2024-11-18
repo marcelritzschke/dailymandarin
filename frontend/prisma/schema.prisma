@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model LearningCard {
+  id          Int             @id @default(autoincrement())
+  word        BilingualText?  @relation("Word")
+  level       Int
+  examples    BilingualText[] @relation("Examples")
+}
+
+model BilingualText {
+  id                Int           @id @default(autoincrement())
+  original          String
+  translation       String
+  wordOfCard        LearningCard? @relation("Word", fields: [wordOfCardId], references: [id])
+  wordOfCardId      Int?          @unique
+  examplesOfCard    LearningCard? @relation("Examples", fields: [examplesOfCardId], references: [id])
+  examplesOfCardId  Int?
+}

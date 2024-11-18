@@ -1,20 +1,26 @@
+import prisma from "@/prisma/client";
 import ChatBoxComponent from "@/app/components/Chatbox";
-import { promises as fs } from 'fs'
 import { LearningCard, BilingualText } from "@/types/types";
 import MandarinEnglishText from "@/app/components/MandarinEnglishText";
 
-async function fetchCard(id: number): Promise<LearningCard | null> {
-  const file = await fs.readFile(process.cwd() + '/public/cards.json', 'utf-8');
-  const cards: LearningCard[] = JSON.parse(file);
+async function fetchCard(id: string): Promise<LearningCard | null> {
+  const card: LearningCard = await prisma.learningCard.findUnique({
+    where: {
+      id: Number(id)
+    },
+    include: {
+        word: true,
+        examples: true
+    }
+  }) as LearningCard;
+
+  if (card === null) return null;
   
-  const res: LearningCard = cards[id];
-  if (res === undefined) return null;
-  
-  return res;
+  return card;
 }
 
 interface CardDetailProps {
-  params: { id: number };
+  params: { id: string };
 }
 
 export default async function CardDetailPage({ params }: CardDetailProps) {
@@ -29,7 +35,7 @@ export default async function CardDetailPage({ params }: CardDetailProps) {
           <div className="card" style={{height: "29%"}}>
             <div className="card-header">Description</div>
             <div className="card-body">
-              <MandarinEnglishText text={card.word} focus={card.word.original} />
+              <MandarinEnglishText key={undefined} text={card.word} focus={card.word.original} />
             </div>
           </div>
           <div className="flex-grow-1"></div>
@@ -37,8 +43,8 @@ export default async function CardDetailPage({ params }: CardDetailProps) {
             <div className="card-header">Examples</div>
             <div className="card-body">
               {
-                card.examples.map((txt: BilingualText) => (
-                  <MandarinEnglishText text={txt} focus={card.word.original} />
+                card.examples.map((txt: BilingualText, idx) => (
+                  <MandarinEnglishText key={idx} text={txt} focus={card.word.original} />
                 ))
               }
             </div>

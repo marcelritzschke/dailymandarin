@@ -1,13 +1,16 @@
 "use client"
 import { LearningCard } from "@/types/types"
 import Link from "next/link";
-import { useState } from "react";
 
 
 
 const LearningCardsTable: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
   
-  const deleteVocabulary = async (id: number) => {
+  const deleteVocabulary = async (id?: number) => {
+    if (id === undefined) {
+      return;
+    }
+    
     try {
       const res = await fetch("/api/delete-card", {
           method: 'POST',
@@ -37,10 +40,10 @@ const LearningCardsTable: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
           </tr>
         </thead>
         <tbody>
-          {cards.map((card, idx) => (
-            <tr key={idx}>
+          {cards.map((card) => (
+            <tr key={card.id}>
               <td className="col-md-2">
-                <Link href={`/cards/${idx}`} className="text-decoration-none">
+                <Link href={`/cards/${card.id}`} className="text-decoration-none">
                   {card.word.original}
                 </Link>
               </td>
@@ -51,7 +54,7 @@ const LearningCardsTable: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
                 </span>
               </td> */}
               <td className="cold-md-2">
-                <button type="button" className="btn text-danger trash-button" onClick={() => deleteVocabulary(idx)}>
+                <button type="button" className="btn text-danger trash-button" onClick={() => deleteVocabulary(card.id)}>
                   <i className="bi bi-trash"></i>
                 </button>
               </td>

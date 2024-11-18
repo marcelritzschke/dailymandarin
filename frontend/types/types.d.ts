@@ -1,3 +1,6 @@
+import { LearningCardType } from "@/prisma/types";
+
+
 export interface BilingualText {
     original: string;
     translation: string;
