@@ -10,22 +10,39 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["omitApi"]
 }
 
 model LearningCard {
-  id          Int             @id @default(autoincrement())
-  word        BilingualText?  @relation("Word")
-  level       Int
-  examples    BilingualText[] @relation("Examples")
+  id       Int             @id @default(autoincrement())
+  word     BilingualText?  @relation("Word")
+  level    Int
+  examples BilingualText[] @relation("Examples")
+  fsrsCard FsrsCard?
+}
+
+model FsrsCard {
+  id                   Int           @id @unique @default(autoincrement())
+  due                  DateTime      @default(now())
+  stability            Float         @default(0)
+  difficulty           Float         @default(0)
+  elapsed_days         Int           @default(0)
+  scheduled_days       Int           @default(0)
+  reps                 Int           @default(0)
+  lapses               Int           @default(0)
+  state                Int           @default(0)
+  last_review          DateTime?
+  fsrsOfLearningCard   LearningCard? @relation(fields: [fsrsOfLearningCardId], references: [id])
+  fsrsOfLearningCardId Int?          @unique
 }
 
 model BilingualText {
-  id                Int           @id @default(autoincrement())
-  original          String
-  translation       String
-  wordOfCard        LearningCard? @relation("Word", fields: [wordOfCardId], references: [id])
-  wordOfCardId      Int?          @unique
-  examplesOfCard    LearningCard? @relation("Examples", fields: [examplesOfCardId], references: [id])
-  examplesOfCardId  Int?
+  id               Int           @id @default(autoincrement())
+  original         String
+  translation      String
+  wordOfCard       LearningCard? @relation("Word", fields: [wordOfCardId], references: [id])
+  wordOfCardId     Int?          @unique
+  examplesOfCard   LearningCard? @relation("Examples", fields: [examplesOfCardId], references: [id])
+  examplesOfCardId Int?
 }

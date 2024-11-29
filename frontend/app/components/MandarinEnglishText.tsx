@@ -43,11 +43,12 @@ const MandarinEnglishText: React.FC<{ key: number | undefined, text: BilingualTe
     return (
         <div className="card border-0" key={key}>
             <div className="card-body">
-                <h5 className="card-title">
+                <h5 className="card-title noto-serif-sc">
                     {hanzi.map((c, idx) => (
                         <span key={idx} className={`
                             ${getTone(tones[idx], isToneColorized)}
                             ${getFocus(idx)}
+                            hanzi-spacing
                         `}>{c}</span>
                     ))}
                 </h5>

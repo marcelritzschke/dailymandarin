@@ -1,6 +1,26 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import "bootstrap-icons/font/bootstrap-icons.css";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&display=swap');
 
+
+.noto-serif-sc {
+  font-family: "Noto Serif SC", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.noto-sans-sc {
+  font-family: "Noto Sans SC", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.hanzi-spacing {
+  margin-right: 0.15em;
+}
 
 .tone-first {
   color: rgb(255, 82, 82) !important;
@@ -57,10 +77,6 @@
   resize: none;
 }
 
-.card-chatbox {
-  height: "100%";
-}
-
 /* Table design */
 
 .table {
@@ -109,4 +125,16 @@ main {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+@media(min-width: 576px) {
+  .rating-buttons {
+    width: 350px;
+  }
+}
+
+@media(max-width: 576px) {
+  .rating-buttons {
+    width: 75%;
+  }
 }

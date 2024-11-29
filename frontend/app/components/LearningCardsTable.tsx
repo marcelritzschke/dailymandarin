@@ -10,7 +10,7 @@ const LearningCardsTable: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
     if (id === undefined) {
       return;
     }
-    
+
     try {
       const res = await fetch("/api/delete-card", {
           method: 'POST',
@@ -36,6 +36,9 @@ const LearningCardsTable: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
           <tr>
             <th scope="col">Word</th>
             <th scope="col">Description</th>
+            <th scope="col">New</th>
+            <th scope="col">Learn</th>
+            <th scope="col">Due</th>
             <th scope="col">Remove</th>
           </tr>
         </thead>
@@ -43,17 +46,16 @@ const LearningCardsTable: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
           {cards.map((card) => (
             <tr key={card.id}>
               <td className="col-md-2">
-                <Link href={`/cards/${card.id}`} className="text-decoration-none">
+                <Link href={`/cards/${card.id}`} className="text-decoration-none noto-serif-sc">
                   {card.word.original}
                 </Link>
               </td>
-              <td className="col-md-8">{card.word.translation}</td>
-              {/* <td>
-                <span className={`badge ${card.difficulty === 'Easy' ? 'bg-success' : card.difficulty === 'Medium' ? 'bg-warning' : 'bg-danger'}`}>
-                  {card.difficulty}
-                </span>
-              </td> */}
-              <td className="cold-md-2">
+              <td className="col-md-6">{card.word.translation}</td>
+              <td className="col-md-1"></td>
+              <td className="col-md-1"></td>
+              <td className="col-md-1"></td>
+              
+              <td className="cold-md-1">
                 <button type="button" className="btn text-danger trash-button" onClick={() => deleteVocabulary(card.id)}>
                   <i className="bi bi-trash"></i>
                 </button>
