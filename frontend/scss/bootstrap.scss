@@ -1,0 +1,21 @@
+$primary:#87110D;
+$warning: #CF8137;
+$secondary:#A49371;
+$info: #537C90;
+$dark: #200806;
+$light: #dad8d4;
+
+$link-color-dark: $secondary;
+$link-color: $secondary;
+
+$navbar-padding-y: 0.25rem;
+
+$dropdown-min-width: 1rem;
+$dropdown-font-size: 0.75rem;
+$caret-width: 0.2rem;
+
+
+// $dark-bg-subtle-dark:#1b0f0f;
+// $dark-bg-subtle: #ffc6c4;
+
+@import "../node_modules/bootstrap/scss/bootstrap";

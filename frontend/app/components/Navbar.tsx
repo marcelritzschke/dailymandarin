@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ThemeChanger from "./ThemeChanger";
 
 export default function Navbar() {
   return (
@@ -6,7 +7,7 @@ export default function Navbar() {
       <div className="container">
         <Link href="/" className="navbar-brand">
           {/* <Image src="/madarin.png" alt="App Icon" width="30" height="30" className="d-inline-block align-top" /> */}
-          DailyMandarin
+          <span style={{ color: "#A49371" }}>DailyMandarin</span>
         </Link>
 
         <button
@@ -23,23 +24,31 @@ export default function Navbar() {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
+            <li className="nav-item my-auto">
               <Link href="/" className="nav-link">
                 Deck
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item my-auto">
               <Link href="/add-card/" className="nav-link">
                 Add
               </Link>
             </li>
-            <li className="nav-item me-3">
+            <li className="nav-item my-auto me-3">
               <Link href="/study/" className="nav-link">
                 Study
               </Link>
             </li>
-            <li className="nav-item">
-              <button className="btn btn-outline-primary">Sign In</button>
+            <li className="nav-item my-auto me-2 ms-2">
+              <Link href="#">
+                <i className="bi bi-github"></i>
+              </Link>
+            </li>
+            <li className="my-auto me-2 pt-1">
+              <div className="vr"></div>
+            </li>
+            <li className="nav-item my-auto">
+              <ThemeChanger />
             </li>
           </ul>
         </div>

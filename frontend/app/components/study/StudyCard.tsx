@@ -62,38 +62,22 @@ const StudyCardComponent: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
           {isOpen ? (
             <div className="row mx-auto rating-buttons">
               <div className="col-sm-3 p-1">
-                <button
-                  type="button"
-                  className="btn btn-secondary bg-dark w-100"
-                  onClick={() => setRating(Rating.Again)}
-                >
+                <button type="button" className="btn btn-primary w-100" onClick={() => setRating(Rating.Again)}>
                   Again
                 </button>
               </div>
               <div className="col-sm-3 p-1">
-                <button
-                  type="button"
-                  className="btn btn-secondary bg-dark w-100"
-                  onClick={() => setRating(Rating.Hard)}
-                >
+                <button type="button" className="btn btn-primary w-100" onClick={() => setRating(Rating.Hard)}>
                   Hard
                 </button>
               </div>
               <div className="col-sm-3 p-1">
-                <button
-                  type="button"
-                  className="btn btn-secondary bg-dark w-100"
-                  onClick={() => setRating(Rating.Good)}
-                >
+                <button type="button" className="btn btn-primary w-100" onClick={() => setRating(Rating.Good)}>
                   Good
                 </button>
               </div>
               <div className="col-sm-3 p-1">
-                <button
-                  type="button"
-                  className="btn btn-secondary bg-dark w-100"
-                  onClick={() => setRating(Rating.Easy)}
-                >
+                <button type="button" className="btn btn-primary w-100" onClick={() => setRating(Rating.Easy)}>
                   Easy
                 </button>
               </div>
@@ -101,7 +85,7 @@ const StudyCardComponent: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
           ) : (
             <div className="row mx-auto rating-buttons">
               <div className="col-sm-12 p-1">
-                <button type="button" className="btn btn-secondary bg-dark" onClick={() => setIsOpen(true)}>
+                <button type="button" className="btn btn-primary" onClick={() => setIsOpen(true)}>
                   Show Answer
                 </button>
               </div>
@@ -116,7 +100,7 @@ const StudyCardComponent: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
         <p>
           Finished for Today <i className="bi bi-rocket-takeoff"></i>
         </p>
-        <a type="button" className="btn btn-secondary bg-dark mt-3" href="/">
+        <a type="button" className="btn btn-primary mt-3" href="/">
           Return Home
         </a>
       </div>

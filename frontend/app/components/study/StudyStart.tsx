@@ -46,7 +46,7 @@ const StudyStart: React.FC<StudyStartParams> = ({ setCards, setStarted }) => {
       )}
       <button
         type="button"
-        className={`btn btn-secondary bg-dark ${loading && "visually-hidden"}`}
+        className={`btn btn-primary ${loading && "visually-hidden"}`}
         onClick={() => fetchStudyCards()}
         disabled={loading}
       >

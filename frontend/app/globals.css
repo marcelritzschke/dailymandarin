@@ -1,8 +1,12 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '../css/bootstrap.css';
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&display=swap');
 
+
+.vr {
+  color: #537C90;
+}
 
 .noto-serif-sc {
   font-family: "Noto Serif SC", serif;
@@ -42,16 +46,6 @@
   color: white !important;
 }
 
-.btn-outline-primary {
-  color: #fca139 !important;
-  border-color: #fca139 !important;
-}
-
-.btn-outline-primary:hover {
-  background-color: #fca139 !important;
-  color: white !important;
-}
-
 .messages {
   display: flex;
   flex-direction: column;
@@ -85,7 +79,6 @@
 
 .table th {
   font-weight: bold;
-  color: #7d868f !important;
 }
 
 .table .text-decoration-none {
@@ -99,7 +92,7 @@
 }
 
 .trash-button:hover {
-  color: #a00e0e !important;
+  color: #b11b1b !important;
 }
 
 /* Root design */

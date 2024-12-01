@@ -165,12 +165,12 @@ const AddCard: React.FC = () => {
       )}
       <div className="row mb-3 mt-5">
         <div className="col">
-          <button type="button" className="btn btn-secondary w-100" onClick={generateExamples}>
+          <button type="button" className="btn btn-info w-100" onClick={generateExamples}>
             Ask ChatGPT for Examples
           </button>
         </div>
         <div className="col">
-          <button type="button" className="btn btn-secondary w-100" onClick={addExample}>
+          <button type="button" className="btn btn-info w-100" onClick={addExample}>
             Add Example
           </button>
         </div>
