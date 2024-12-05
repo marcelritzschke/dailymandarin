@@ -1,7 +1,7 @@
 "use client";
 import { LearningCard } from "@/types/types";
 import { useState } from "react";
-import { translateMandarinToPinyin } from "@/app/utils/translation";
+import { translateMandarinToPinyin } from "@/utils/translation";
 import { Card, fsrs, FSRS, RecordLog, Grade, Rating } from "ts-fsrs";
 
 const StudyCardComponent: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {

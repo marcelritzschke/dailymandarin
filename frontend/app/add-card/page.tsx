@@ -1,11 +1,9 @@
-import AddCard from "../components/AddCard";
+import AddCard from "@/components/AddCard";
 
-
-export default async function CardDetailPage() { 
+export default async function CardDetailPage() {
   return (
     <div className="container">
       <AddCard />
     </div>
   );
 }
-  

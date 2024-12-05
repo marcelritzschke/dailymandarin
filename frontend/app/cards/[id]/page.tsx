@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
-import ChatBoxComponent from "@/app/components/Chatbox";
+import ChatBoxComponent from "@/components/Chatbox";
 import { LearningCard, BilingualText } from "@/types/types";
-import MandarinEnglishText from "@/app/components/MandarinEnglishText";
+import MandarinEnglishText from "@/components/MandarinEnglishText";
 
 async function fetchCard(id: string): Promise<LearningCard | null> {
   const card: LearningCard = (await prisma.learningCard.findUnique({

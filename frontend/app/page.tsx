@@ -1,18 +1,5 @@
-import LearningCardsTable from "./components/LearningCardsTable";
-import prisma from "@/prisma/client";
-import { LearningCard } from "@/types/types";
+import DeckTable from "@/components/deck/DeckTable";
 
-export default async function HomePage() {
-  const cards: LearningCard[] = (await prisma.learningCard.findMany({
-    include: {
-      word: true,
-      examples: true,
-    },
-  })) as Array<LearningCard & { fsrsCard: undefined }>;
-
-  return (
-    <div className="container mt-4">
-      <LearningCardsTable cards={cards} />
-    </div>
-  );
+export default function HomePage() {
+  return <DeckTable />;
 }
