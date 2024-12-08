@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { LearningCard } from "@/types/types";
-import StudyCardComponent from "./study/StudyCard";
-import StudyStart from "./study/StudyStart";
+import StudyCardComponent from "./StudyCard";
+import StudyStart from "./StudyStart";
 
 const StudyComponent: React.FC = () => {
   const [cards, setCards] = useState<LearningCard[]>([]);

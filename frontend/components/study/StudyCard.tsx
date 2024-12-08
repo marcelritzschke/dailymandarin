@@ -2,7 +2,8 @@
 import { LearningCard } from "@/types/types";
 import { useState } from "react";
 import { translateMandarinToPinyin } from "@/utils/translation";
-import { Card, fsrs, FSRS, RecordLog, Grade, Rating } from "ts-fsrs";
+import { Card, Grade, Rating } from "ts-fsrs";
+import { updateFsrsCard } from "@/lib/actions";
 
 const StudyCardComponent: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -10,25 +11,26 @@ const StudyCardComponent: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
 
   const setRating = async (rating: Grade) => {
     const fsrsCard: Card = cards[cardIdx].fsrsCard;
-    const f: FSRS = fsrs();
-    const schedulingCards: RecordLog = f.repeat(fsrsCard, new Date());
-    const newCard: Card = schedulingCards[rating].card;
+    // const f: FSRS = fsrs();
+    // const schedulingCards: RecordLog = f.repeat(fsrsCard, new Date());
+    // const newCard: Card = schedulingCards[rating].card;
 
-    try {
-      const res = await fetch("/api/add-card", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: cards[cardIdx].id, fsrsCard: newCard }),
-      });
+    // try {
+    //   const res = await fetch("/api/add-card", {
+    //     method: "PUT",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ id: cards[cardIdx].id, fsrsCard: newCard }),
+    //   });
 
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
+    //   if (!res.ok) {
+    //     throw new Error("Network response was not ok");
+    //   }
+    // } catch (error) {
+    //   console.error("Error sending message:", error);
+    // }
+    updateFsrsCard(cards[cardIdx].id, rating, fsrsCard);
 
     setIsOpen(false);
     setCardIdx(cardIdx + 1);
