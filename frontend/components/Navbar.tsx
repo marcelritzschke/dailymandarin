@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ThemeChanger from "./ThemeChanger";
+import Login from "./Login";
 
 export default function Navbar() {
   return (
@@ -40,9 +41,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item my-auto me-2 ms-2">
-              <Link href="#">
-                <i className="bi bi-github"></i>
-              </Link>
+              <Login />
             </li>
             <li className="my-auto me-2 pt-1">
               <div className="vr"></div>

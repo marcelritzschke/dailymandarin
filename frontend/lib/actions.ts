@@ -2,7 +2,15 @@
 
 import prisma from "@/prisma/client";
 import { LearningCard } from "@/types/types";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { Card, fsrs, FSRS, RecordLog, Grade } from "ts-fsrs";
+
+
+export async function revalidateDeck() {
+  revalidatePath("/", "page");
+  redirect("/");
+}
 
 export async function updateFsrsCard(id: number | undefined, rating: Grade, fsrsCard: Card) {
   const f: FSRS = fsrs();

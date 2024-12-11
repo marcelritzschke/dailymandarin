@@ -1,6 +1,7 @@
 "use client";
+import { revalidateDeck } from "@/lib/actions";
 import { BilingualText, LearningCard } from "@/types/types";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { createEmptyCard } from "ts-fsrs";
 
 const AddCard: React.FC = () => {
@@ -77,8 +78,9 @@ const AddCard: React.FC = () => {
     }
   };
 
-  // const submitToDict = async (e: FormEvent) => {
-  const submitToDict = async () => {
+  const submitToDict = async (e: FormEvent) => {
+    e.preventDefault();
+
     const newCard: LearningCard = {
       level: 1,
       word: { original: wordInput, translation: translationInput },
@@ -101,7 +103,7 @@ const AddCard: React.FC = () => {
       console.error("Error sending message:", error);
     }
 
-    // window.location.href = '/';
+    await revalidateDeck();
   };
 
   return (
