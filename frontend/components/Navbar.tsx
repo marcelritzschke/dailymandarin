@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ThemeChanger from "./ThemeChanger";
-import Login from "./Login";
+import SignInOut from "./SignInOut";
 
 export default function Navbar() {
   return (
@@ -40,14 +40,19 @@ export default function Navbar() {
                 Study
               </Link>
             </li>
-            <li className="nav-item my-auto me-2 ms-2">
-              <Login />
+            <li className="nav-item my-auto ms-2 me-2">
+              <Link href="https://github.com/marcelritzschke/dailymandarin" target="_blank">
+                <i className="bi bi-github"></i>
+              </Link>
             </li>
             <li className="my-auto me-2 pt-1">
               <div className="vr"></div>
             </li>
-            <li className="nav-item my-auto">
+            <li className="nav-item my-auto me-2">
               <ThemeChanger />
+            </li>
+            <li className="nav-item my-auto ms-3">
+              <SignInOut />
             </li>
           </ul>
         </div>
