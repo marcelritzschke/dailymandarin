@@ -1,9 +1,10 @@
 "use client";
-import { LearningCard } from "@/types/types";
+import { fetchFsrsCards } from "@/lib/db/actions";
+import { FsrsCardType } from "@/prisma/types";
 import { useState } from "react";
 
 interface StudyStartParams {
-  setCards: (cards: LearningCard[]) => void;
+  setCards: (cards: FsrsCardType[]) => void;
   setStarted: (value: boolean) => void;
 }
 
@@ -13,23 +14,9 @@ const StudyStart: React.FC<StudyStartParams> = ({ setCards, setStarted }) => {
   const fetchStudyCards = async () => {
     setLoading(true);
 
-    try {
-      const res = await fetch("/api/study", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const cards: LearningCard[] = await res.json();
-      setCards(cards);
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
+    await fetchFsrsCards().then((res) => {
+      setCards(res);
+    });
 
     setStarted(true);
     setLoading(false);

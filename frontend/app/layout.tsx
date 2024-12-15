@@ -4,8 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BootstrapClient from "@/components/BootstrapClient";
 import { ThemeProvider } from "next-themes";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
+import { getServerSession, Session } from "next-auth";
 import ClientProvider from "@/components/ClientProvider";
 
 export const metadata: Metadata = {
@@ -18,9 +18,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
-  console.log(session);
-  
+  const session: Session | null = await getServerSession(authOptions);
+
   return (
     <html lang="en" data-bs-theme="system" suppressHydrationWarning>
       <body className="d-flex flex-column">

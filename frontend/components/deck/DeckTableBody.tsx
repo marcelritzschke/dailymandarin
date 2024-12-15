@@ -1,5 +1,7 @@
 "use client";
-import { LearningCard } from "@/types/types";
+import { deleteCard } from "@/lib/db/actions";
+import { revalidateDeck } from "@/lib/utils";
+import { LearningCard } from "@/prisma/types";
 import Link from "next/link";
 
 const DeckTableBody: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
@@ -8,22 +10,8 @@ const DeckTableBody: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
       return;
     }
 
-    try {
-      const res = await fetch("/api/delete-card", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ idx: id }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
-    window.location.reload();
+    await deleteCard(id);
+    await revalidateDeck();
   };
 
   return (
@@ -32,10 +20,10 @@ const DeckTableBody: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
         <tr key={card.id}>
           <td className="col-md-2">
             <Link href={`/cards/${card.id}`} className="text-decoration-none noto-serif-sc ">
-              {card.word.original}
+              {card.word?.original}
             </Link>
           </td>
-          <td className="col-md-6">{card.word.translation}</td>
+          <td className="col-md-6">{card.word?.translation}</td>
           <td className="col-md-1"></td>
           <td className="col-md-1"></td>
           <td className="col-md-1"></td>

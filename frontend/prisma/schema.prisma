@@ -14,27 +14,38 @@ generator client {
   previewFeatures = ["omitApi"]
 }
 
+model User {
+  id      Int        @id @unique @default(autoincrement())
+  name    String     @unique
+  oauthId String
+  email   String     @unique
+  cards   FsrsCard[]
+}
+
+model FsrsCard {
+  id             Int           @id @unique @default(autoincrement())
+  due            DateTime      @default(now())
+  stability      Float         @default(0)
+  difficulty     Float         @default(0)
+  elapsed_days   Int           @default(0)
+  scheduled_days Int           @default(0)
+  reps           Int           @default(0)
+  lapses         Int           @default(0)
+  state          Int           @default(0)
+  last_review    DateTime?
+  learningCard   LearningCard? @relation(fields: [learningCardId], references: [id])
+  learningCardId Int?
+  user           User?         @relation(fields: [userId], references: [id])
+  userId         Int?
+}
+
 model LearningCard {
   id       Int             @id @default(autoincrement())
   word     BilingualText?  @relation("Word")
   level    Int
   examples BilingualText[] @relation("Examples")
-  fsrsCard FsrsCard?
-}
-
-model FsrsCard {
-  id                   Int           @id @unique @default(autoincrement())
-  due                  DateTime      @default(now())
-  stability            Float         @default(0)
-  difficulty           Float         @default(0)
-  elapsed_days         Int           @default(0)
-  scheduled_days       Int           @default(0)
-  reps                 Int           @default(0)
-  lapses               Int           @default(0)
-  state                Int           @default(0)
-  last_review          DateTime?
-  fsrsOfLearningCard   LearningCard? @relation(fields: [fsrsOfLearningCardId], references: [id])
-  fsrsOfLearningCardId Int?          @unique
+  public   Boolean         @default(false)
+  fsrsCard FsrsCard[]
 }
 
 model BilingualText {

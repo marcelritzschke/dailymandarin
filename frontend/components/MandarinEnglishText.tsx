@@ -1,8 +1,8 @@
-import { BilingualText } from "@/types/types";
-import { translateMandarinToPinyin, getTones } from "@/utils/translation";
+import { BilingualText } from "@/prisma/types";
+import { translateMandarinToPinyin, getTones } from "@/lib/translation";
 
-const MandarinEnglishText: React.FC<{ key: number | undefined; text: BilingualText; focus: string }> = ({
-  key,
+const MandarinEnglishText: React.FC<{ cardId: number | undefined; text: BilingualText; focus: string }> = ({
+  cardId,
   text,
   focus,
 }) => {
@@ -44,7 +44,7 @@ const MandarinEnglishText: React.FC<{ key: number | undefined; text: BilingualTe
   };
 
   return (
-    <div className="card border-0" key={key}>
+    <div className="card border-0" key={cardId}>
       <div className="card-body">
         <h5 className="card-title noto-serif-sc">
           {hanzi.map((c, idx) => (

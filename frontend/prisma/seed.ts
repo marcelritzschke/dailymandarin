@@ -8,6 +8,7 @@ async function main() {
 
   const card1 = await prisma.learningCard.create({
     data: {
+      public: true,
       level: 1,
       word: {
         create: {
@@ -27,16 +28,12 @@ async function main() {
           },
         ],
       },
-      fsrsCard: {
-        create: {
-          due: new Date(),
-        },
-      },
     },
   });
 
   const card2 = await prisma.learningCard.create({
     data: {
+      public: true,
       level: 2,
       word: {
         create: {
@@ -55,11 +52,6 @@ async function main() {
             translation: "Thank you for coming!",
           },
         ],
-      },
-      fsrsCard: {
-        create: {
-          due: new Date(),
-        },
       },
     },
   });

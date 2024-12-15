@@ -34,15 +34,18 @@ const SignInOut: React.FC = () => {
             </Tooltip.Trigger>
             <ul className="dropdown-menu dropdown-menu-end">
               <li>
-                <a className="dropdown-item" href="#" onClick={() => signOut()}>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => {
+                    signOut({ callbackUrl: "/logout-callback" });
+                  }}
+                >
                   Log Out <i className="bi bi-box-arrow-right ms-1"></i>
                 </a>
               </li>
             </ul>
-            <Tooltip.Content
-              side="bottom"
-              className="tooltip-content p-1 rounded-1"
-            >
+            <Tooltip.Content side="bottom" className="tooltip-content p-1 rounded-1">
               <Tooltip.Arrow className="tooltip-arrow" />
               Logged in as {session.user?.name ?? "Github User"}
             </Tooltip.Content>
@@ -52,7 +55,7 @@ const SignInOut: React.FC = () => {
     );
   } else {
     return (
-      <button className="btn btn-primary" onClick={() => signIn("github")}>
+      <button className="btn btn-primary" onClick={() => signIn("github", { callbackUrl: "/login-callback" })}>
         Sign In
       </button>
     );

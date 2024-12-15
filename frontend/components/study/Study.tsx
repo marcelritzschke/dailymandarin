@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import { LearningCard } from "@/types/types";
 import StudyCardComponent from "./StudyCard";
 import StudyStart from "./StudyStart";
+import { FsrsCardType } from "@/prisma/types";
 
 const StudyComponent: React.FC = () => {
-  const [cards, setCards] = useState<LearningCard[]>([]);
+  const [cards, setCards] = useState<FsrsCardType[]>([]);
   const [isStarted, setIsStarted] = useState<boolean>(false);
 
   return (

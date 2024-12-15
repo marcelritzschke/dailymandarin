@@ -1,8 +1,8 @@
 "use client";
-import { revalidateDeck } from "@/lib/actions";
-import { BilingualText, LearningCard } from "@/types/types";
+import { addCard } from "@/lib/db/actions";
+import { revalidateDeck } from "@/lib/utils";
+import { BilingualText } from "@/prisma/types";
 import { FormEvent, useState } from "react";
-import { createEmptyCard } from "ts-fsrs";
 
 const AddCard: React.FC = () => {
   const [wordInput, setWordInput] = useState("");
@@ -81,28 +81,7 @@ const AddCard: React.FC = () => {
   const submitToDict = async (e: FormEvent) => {
     e.preventDefault();
 
-    const newCard: LearningCard = {
-      level: 1,
-      word: { original: wordInput, translation: translationInput },
-      examples: examples,
-      fsrsCard: createEmptyCard(),
-    };
-    try {
-      const res = await fetch("/api/add-card", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ card: newCard }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
-
+    await addCard(wordInput, translationInput, examples);
     await revalidateDeck();
   };
 

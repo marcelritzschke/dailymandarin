@@ -1,35 +1,16 @@
 "use client";
-import { LearningCard } from "@/types/types";
 import { useState } from "react";
-import { translateMandarinToPinyin } from "@/utils/translation";
-import { Card, Grade, Rating } from "ts-fsrs";
-import { updateFsrsCard } from "@/lib/actions";
+import { translateMandarinToPinyin } from "@/lib/translation";
+import { Grade, Rating } from "ts-fsrs";
+import { updateFsrsCard } from "@/lib/db/actions";
+import { FsrsCardType } from "@/prisma/types";
 
-const StudyCardComponent: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
+const StudyCardComponent: React.FC<{ cards: FsrsCardType[] }> = ({ cards }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [cardIdx, setCardIdx] = useState<number>(0);
 
   const setRating = async (rating: Grade) => {
-    const fsrsCard: Card = cards[cardIdx].fsrsCard;
-    // const f: FSRS = fsrs();
-    // const schedulingCards: RecordLog = f.repeat(fsrsCard, new Date());
-    // const newCard: Card = schedulingCards[rating].card;
-
-    // try {
-    //   const res = await fetch("/api/add-card", {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ id: cards[cardIdx].id, fsrsCard: newCard }),
-    //   });
-
-    //   if (!res.ok) {
-    //     throw new Error("Network response was not ok");
-    //   }
-    // } catch (error) {
-    //   console.error("Error sending message:", error);
-    // }
+    const fsrsCard: FsrsCardType = cards[cardIdx];
     updateFsrsCard(cards[cardIdx].id, rating, fsrsCard);
 
     setIsOpen(false);
@@ -37,7 +18,7 @@ const StudyCardComponent: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
   };
 
   if (cards.length && cardIdx < cards.length) {
-    const hanzi = cards[cardIdx].word.original.split("");
+    const hanzi = cards[cardIdx].learningCard?.word?.original.split("") as string[];
 
     return (
       <>
@@ -53,12 +34,14 @@ const StudyCardComponent: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
             </span>
           ))}
         </h5>
-        <h6 className="mb-2 text-body-secondary">{translateMandarinToPinyin(cards[cardIdx].word.original)}</h6>
+        <h6 className="mb-2 text-body-secondary">
+          {translateMandarinToPinyin(cards[cardIdx].learningCard?.word?.original as string)}
+        </h6>
 
         <div className="container">
           <div className={`${isOpen ? "visible" : "invisible"}`}>
             <hr className="border-2 border-light w-75 mx-auto" />
-            <p>{cards[cardIdx].word.translation}</p>
+            <p>{cards[cardIdx].learningCard?.word?.translation}</p>
           </div>
 
           {isOpen ? (
