@@ -104,35 +104,29 @@ export async function updateFsrsCard(id: number | undefined, rating: Grade, fsrs
   });
 }
 
-export async function fetchDeck(): Promise<LearningCard[]> {
+export async function fetchDeckUser(): Promise<FsrsCardType[]> {
   const userId = await getActiveUserId();
 
-  if (userId) {
-    const cards: LearningCard[] = (await prisma.fsrsCard
-      .findMany({
-        where: { userId: userId },
-        include: {
-          learningCard: { include: { word: true, examples: true } },
-        },
-      })
-      .then((res) => {
-        return res.map((card) => {
-          return card.learningCard;
-        });
-      })) as LearningCard[];
+  const cards: FsrsCardType[] = (await prisma.fsrsCard.findMany({
+    where: { userId: userId },
+    include: {
+      learningCard: { include: { word: true, examples: true } },
+    },
+  })) as FsrsCardType[];
 
-    return cards;
-  } else {
-    const cards: LearningCard[] = (await prisma.learningCard.findMany({
-      where: { public: true },
-      include: { word: true, examples: true },
-    })) as LearningCard[];
-
-    return cards;
-  }
+  return cards;
 }
 
-async function getActiveUserId(): Promise<number | undefined> {
+export async function fetchDeckPublic(): Promise<LearningCard[]> {
+  const cards: LearningCard[] = (await prisma.learningCard.findMany({
+    where: { public: true },
+    include: { word: true, examples: true },
+  })) as LearningCard[];
+
+  return cards;
+}
+
+export async function getActiveUserId(): Promise<number | undefined> {
   const session = await getServerSession(authOptions);
   if (session && session.user && session.user.email && session.user.name) {
     return await fetchUserByMail(session.user.email).then((id) => {

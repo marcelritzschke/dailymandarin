@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import DeckTableBodyLoader from "./DeckTableBodyLoader";
 import DeckTableHead from "./DeckTableHead";
 import DeckTableBodyLoading from "./DeckTableBodyLoading";
+import DeckTableBody from "./DeckTableBody";
 
 const LearningCardsTable: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const LearningCardsTable: React.FC = () => {
       <table className="table table-striped">
         <DeckTableHead />
         <Suspense fallback={<DeckTableBodyLoading />}>
-          <DeckTableBodyLoader />
+          <DeckTableBody />
         </Suspense>
       </table>
     </div>

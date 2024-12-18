@@ -1,38 +1,49 @@
-"use client";
-import { deleteCard } from "@/lib/db/actions";
-import { revalidateDeck } from "@/lib/utils";
-import { LearningCard } from "@/prisma/types";
+import { FsrsCardType } from "@/prisma/types";
 import Link from "next/link";
+import DeckDeleteButton from "./DeckDeleteButton";
+import { fetchDeckPublic, fetchDeckUser, getActiveUserId } from "@/lib/db/actions";
+import { colSizesPublic, colSizesUser } from "@/lib/deck";
 
-const DeckTableBody: React.FC<{ cards: LearningCard[] }> = ({ cards }) => {
-  const deleteVocabulary = async (id?: number) => {
-    if (id === undefined) {
-      return;
-    }
+const DeckTableBody: React.FC = async () => {
+  const hasUser = (await getActiveUserId()) !== undefined;
+  const colSizes = hasUser ? colSizesUser : colSizesPublic;
 
-    await deleteCard(id);
-    await revalidateDeck();
-  };
+  let cards: FsrsCardType[] = [];
+  if (hasUser) {
+    cards = await fetchDeckUser();
+  } else {
+    cards = await fetchDeckPublic().then((res) => {
+      return res.map((c) => {
+        return {
+          id: c.id,
+          learningCard: c,
+        } as FsrsCardType;
+      });
+    });
+  }
 
   return (
     <tbody>
       {cards.map((card) => (
         <tr key={card.id}>
-          <td className="col-md-2">
+          <td className={`col-md-${colSizes[0]}`}>
             <Link href={`/cards/${card.id}`} className="text-decoration-none noto-serif-sc ">
-              {card.word?.original}
+              {card.learningCard?.word?.original}
             </Link>
           </td>
-          <td className="col-md-6">{card.word?.translation}</td>
-          <td className="col-md-1"></td>
-          <td className="col-md-1"></td>
-          <td className="col-md-1"></td>
+          <td className={`col-md-${colSizes[1]}`}>{card.learningCard?.word?.translation}</td>
+          <td className={`col-md-${colSizes[2]}`}>{card.learningCard?.level}</td>
 
-          <td className="cold-md-1">
-            <button type="button" className="btn text-primary trash-button" onClick={() => deleteVocabulary(card.id)}>
-              <i className="bi bi-trash"></i>
-            </button>
-          </td>
+          {hasUser && <td className={`col-md-${colSizes[3]}`}></td>}
+          {hasUser && <td className={`col-md-${colSizes[4]}`}></td>}
+          {hasUser && <td className={`col-md-${colSizes[5]}`}></td>}
+          {hasUser && <td className={`col-md-${colSizes[6]}`}></td>}
+
+          {hasUser && (
+            <td className={`col-md-${colSizes[7]}`}>
+              <DeckDeleteButton cardId={card.id} />
+            </td>
+          )}
         </tr>
       ))}
     </tbody>
