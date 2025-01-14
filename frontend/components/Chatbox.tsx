@@ -34,7 +34,10 @@ const ChatBoxComponent: React.FC = () => {
       }
 
       const data = await res.json();
-      const botMessage: Message = { text: data.choices[0].message.content, sender: "system" };
+      const botMessage: Message = {
+        text: data.choices[0].message.content,
+        sender: "system",
+      };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
@@ -55,16 +58,25 @@ const ChatBoxComponent: React.FC = () => {
   };
 
   return (
-    <div className="card h-100" style={{ minHeight: "300px", maxHeight: "80vh" }}>
+    <div className="card h-100" style={{ minHeight: "300px" }}>
       <div className="d-flex flex-column card-body overflow-auto">
         <div className="messages flex-grow-1">
           {messages.map((msg, index) => (
-            <div key={index} className={`message ${msg.sender} ${msg.sender === "user" ? "bg-secondary" : ""}`}>
+            <div
+              key={index}
+              className={`message ${msg.sender} ${
+                msg.sender === "user" ? "bg-secondary" : ""
+              }`}
+            >
               <span>{msg.text}</span>
             </div>
           ))}
           {loading && (
-            <div className="spinner-border text-secondary" style={{ width: "1rem", height: "1rem" }} role="status">
+            <div
+              className="spinner-border text-secondary"
+              style={{ width: "1rem", height: "1rem" }}
+              role="status"
+            >
               <span className="visually-hidden">Typing ...</span>
             </div>
           )}
@@ -80,7 +92,11 @@ const ChatBoxComponent: React.FC = () => {
               rows={1}
               onKeyDown={handleKeyDown}
             />
-            <button type="submit" className="btn btn-primary" style={{ height: "38px" }}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{ height: "38px" }}
+            >
               <i className="bi-send"></i>
             </button>
           </div>

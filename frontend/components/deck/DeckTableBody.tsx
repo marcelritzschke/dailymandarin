@@ -34,10 +34,10 @@ const DeckTableBody: React.FC = async () => {
           <td className={`col-md-${colSizes[1]}`}>{card.learningCard?.word?.translation}</td>
           <td className={`col-md-${colSizes[2]}`}>{card.learningCard?.level}</td>
 
-          {hasUser && <td className={`col-md-${colSizes[3]}`}></td>}
-          {hasUser && <td className={`col-md-${colSizes[4]}`}></td>}
-          {hasUser && <td className={`col-md-${colSizes[5]}`}></td>}
-          {hasUser && <td className={`col-md-${colSizes[6]}`}></td>}
+          {hasUser && <td className={`col-md-${colSizes[3]}`}>{card.state}</td>}
+          {hasUser && <td className={`col-md-${colSizes[4]}`}>{card.due.format()}</td>}
+          {hasUser && <td className={`col-md-${colSizes[5]}`}>{card.elapsed_days}</td>}
+          {hasUser && <td className={`col-md-${colSizes[6]}`}>{card.reps}</td>}
 
           {hasUser && (
             <td className={`col-md-${colSizes[7]}`}>
